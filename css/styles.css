@@ -222,14 +222,14 @@ p {
   border: 2px solid var(--brand-color);
   border-radius: 4px;
   cursor: pointer;
+  transition-property: color, background-color;
+  transition: var(--animation);
 }
 
 .hero-button:hover,
 .hero-button:focus {
   background-color: var(--white);
   color: var(--brand-color);
-  transition-property: color, background-color;
-  transition: var(--animation);
 }
 
 .filter-item:not(:last-child) {
