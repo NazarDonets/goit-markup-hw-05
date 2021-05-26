@@ -8,13 +8,14 @@
   --dark-shade: #212121;
   --white: #ffffff;
   --black: #000;
+  --animation: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 body {
   font-family: "Roboto", sans-serif;
   font-size: 14px;
   font-weight: 400;
-  line-height: 1.14em;
+  line-height: 1.14;
   letter-spacing: 0.03em;
   color: var(--dark-shade);
 }
@@ -45,10 +46,16 @@ p {
   height: 100%;
   align-items: center;
   justify-content: center;
+  position: relative;
 }
 
 .header {
+  position: fixed;
+  top: 0;
+  z-index: 1;
+  width: 100%;
   height: 80px;
+  background-color: var(--white);
   border-bottom: 1px solid #ececec;
 }
 
@@ -75,10 +82,14 @@ p {
   padding-bottom: 94px;
 }
 
+.section:first-child {
+  margin-top: 80px;
+}
+
 .logo {
   font-family: "Raleway", sans-serif;
   font-size: 26px;
-  line-height: 1.19em;
+  line-height: 1.19;
   color: var(--brand-color);
 }
 
@@ -102,12 +113,25 @@ p {
   color: var(--dark-shade);
 }
 
+.nav-link__active::after {
+  content: "";
+  position: absolute;
+  bottom: -1px;
+  width: 100%;
+  height: 4px;
+  background-color: #2196f3;
+  border-radius: 2px;
+}
+
 .nav-link__active,
 .nav-link:hover,
 .nav-link:focus,
 .contacts-link:hover,
-.contacts-link:focus {
+.contacts-link:focus,
+.close-button:hover,
+.close-button:focus {
   color: var(--brand-color);
+  transition: color var(--animation);
 }
 
 .address {
@@ -178,7 +202,7 @@ p {
 .hero-headline {
   font-weight: 900;
   font-size: 44px;
-  line-height: 1.36em;
+  line-height: 1.36;
   letter-spacing: 0.06em;
   text-align: center;
   text-transform: uppercase;
@@ -190,7 +214,7 @@ p {
   padding: 10px 32px;
   font-weight: 700;
   font-size: 16px;
-  line-height: 1.87em;
+  line-height: 1.87;
   letter-spacing: 0.06em;
   background-color: var(--brand-color);
   color: var(--white);
@@ -204,6 +228,8 @@ p {
 .hero-button:focus {
   background-color: var(--white);
   color: var(--brand-color);
+  transition-property: color, background-color;
+  transition: var(--animation);
 }
 
 .filter-item:not(:last-child) {
@@ -216,11 +242,13 @@ p {
   background-color: var(--brand-color);
   font-weight: 500;
   font-size: 16px;
-  line-height: 1.62em;
+  line-height: 1.62;
   background-color: #f5f4fa;
   color: var(--dark-shade);
   border: none;
   cursor: pointer;
+  transition-property: color, background-color, box-shadow;
+  transition: var(--animation);
 }
 
 .filter-button:hover,
@@ -255,13 +283,12 @@ p {
 
 .advantages-heading {
   font-weight: 700;
-  line-height: 1.14em;
   text-transform: uppercase;
 }
 
 .advantages-description {
   margin-top: 10px;
-  line-height: 1.71em;
+  line-height: 1.71;
   color: var(--light-shade);
 }
 
@@ -271,7 +298,7 @@ p {
   text-align: center;
   font-weight: 700;
   font-size: 36px;
-  line-height: 1.16em;
+  line-height: 1.16;
 }
 
 .occupation-list,
@@ -280,6 +307,10 @@ p {
   margin-top: 50px;
   display: flex;
   flex-wrap: wrap;
+}
+
+.occupation-item {
+  position: relative;
 }
 
 .occupation-item:not(:last-child),
@@ -292,6 +323,26 @@ p {
 .project-thumbnail,
 .project-link {
   display: block;
+}
+
+.occupation-description {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 70px;
+  width: 100%;
+  background-color: rgba(47, 48, 58, 0.8);
+}
+
+.occupation-description > p {
+  font-weight: 700;
+  text-align: center;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  color: #ffffff;
 }
 
 .team-section {
@@ -312,14 +363,14 @@ p {
 .teammember-name {
   font-weight: 500;
   font-size: 16px;
-  line-height: 1.18em;
+  line-height: 1.18;
   text-align: center;
 }
 
 .teammember-role {
   margin-top: 10px;
   font-size: 16px;
-  line-height: 1.18em;
+  line-height: 1.18;
   text-align: center;
   color: var(--light-shade);
 }
@@ -342,6 +393,8 @@ p {
   padding: 12px;
   color: #afb1b8;
   border-radius: 50%;
+  transition-property: color, background-color;
+  transition: var(--animation);
 }
 
 .socials-link:hover,
@@ -352,7 +405,8 @@ p {
   background-color: var(--brand-color);
 }
 
-.socials-icon {
+.socials-icon,
+.close-icon {
   width: 100%;
   height: 100%;
 }
@@ -386,6 +440,8 @@ p {
 .clients-link:focus {
   color: var(--brand-color);
   border-color: var(--brand-color);
+  transition-property: color, border-color;
+  transition: var(--animation);
 }
 
 .clients-icon {
@@ -426,10 +482,38 @@ p {
   text-decoration: none;
 }
 
+.animation-container {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+}
+
+.animation-content {
+  position: absolute;
+  display: flex;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+  padding: 24px;
+  background-color: rgba(33, 150, 243, 0.9);
+  transition: transform var(--animation);
+}
+
+.animation-content > p {
+  font-size: 18px;
+  line-height: 1.55;
+  color: var(--white);
+}
+
 .project-link:hover,
 .project-link:focus {
   box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.12), 0px 4px 4px rgba(0, 0, 0, 0.06),
     1px 4px 6px rgba(0, 0, 0, 0.16);
+  transition: box-shadow var(--animation);
+}
+
+.project-link:hover .animation-content {
+  transform: translateY(-100%);
 }
 
 .project-info {
@@ -443,20 +527,78 @@ p {
 .project-heading {
   font-weight: 700;
   font-size: 18px;
-  line-height: 2em;
+  line-height: 2;
   letter-spacing: 0.06em;
   color: var(--dark-shade);
 }
 
 .project-description {
   font-size: 16px;
-  line-height: 1.87em;
+  line-height: 1.87;
   color: var(--light-shade);
 }
 
 .address {
   font-size: 14px;
   font-style: normal;
-  line-height: 1.71em;
+  line-height: 1.71;
   color: var(--white);
+}
+
+.backdrop-filter {
+  position: fixed;
+  z-index: 2;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.2);
+  opacity: 100;
+  transition: opacity var(--animation);
+}
+
+.form-modal {
+  position: relative;
+  width: 528px;
+  height: 581px;
+  background-color: var(--white);
+  box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.12), 0px 1px 1px rgba(0, 0, 0, 0.14),
+    0px 2px 1px rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+  z-index: 3;
+}
+
+.close-button {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  height: 30px;
+  width: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 9px;
+  background: var(--white);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 50%;
+  cursor: pointer;
+  transition: color var(--animation);
+}
+
+/* UTILITES */
+.visually-hidden {
+  position: absolute;
+  clip: rect(0 0 0 0);
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+}
+
+.backdrop-filter__is-hidden {
+  pointer-events: none;
+  opacity: 0;
+  transform: opacity var(--animation);
 }
