@@ -107,7 +107,8 @@ p {
   color: var(--white);
 }
 
-.nav-link {
+.nav-link,
+.contacts-link {
   font-weight: 500;
   letter-spacing: 0.02em;
   color: var(--dark-shade);
@@ -159,8 +160,11 @@ p {
   width: 10px;
 }
 
-.footer > .contacts-link {
+.footer .contacts-link {
   color: rgba(255, 255, 255, 0.6);
+  font-size: 14px;
+  font-weight: 400;
+  letter-spacing: 0.03em;
 }
 
 .hero-section,
@@ -230,6 +234,10 @@ p {
 .hero-button:focus {
   background-color: var(--white);
   color: var(--brand-color);
+}
+
+.advantages-section {
+  padding-bottom: 0;
 }
 
 .filter-item:not(:last-child) {
@@ -512,7 +520,8 @@ p {
   transition: box-shadow var(--animation);
 }
 
-.project-link:hover .animation-content {
+.project-link:hover .animation-content,
+.project-link:focus .animation-content {
   transform: translateY(-100%);
 }
 
